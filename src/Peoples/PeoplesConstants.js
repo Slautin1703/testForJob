@@ -6,13 +6,13 @@ export const tableConfig = [
         width:"15%",
         name: "firstName"
     },{
-        width:"55%",
+        width:"15%",
         name: "lastName"
     },{
-        width:"55%",
+        width:"30%",
         name: "email"
     },{
-        width:"55%",
+        width:"20%",
         name: "phone"
     }
 ]

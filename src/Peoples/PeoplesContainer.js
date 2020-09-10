@@ -1,13 +1,13 @@
-import React, {useCallback, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {getPeoplesAPI} from "./PeoplesAPI";
+import PeoplesTable from "./Components/PeoplesTable";
 
 const PeoplesContainer = () => {
     const [isBigData,setIsBigData] = useState(false);
     const [isLoading,setIsLoading] = useState(false)
     const [peoples,setPeoples] = useState([])
 
-    const getPeoples =  useCallback(() => {
-        setIsBigData(!isBigData)
+    useEffect(() => {
         setIsLoading(true)
         getPeoplesAPI().then(data => {
             setIsLoading(false)
@@ -17,10 +17,10 @@ const PeoplesContainer = () => {
 
     return (
         <div>
-            <button onClick={getPeoples} disabled={isLoading}>
+            <button onClick={() => setIsBigData(!isBigData)} disabled={isLoading}>
                 {isBigData ? 'Показать с маленьким обьемом ': 'Показать с большим обьемом'}
             </button>
-            <PeoplesTable />
+            <PeoplesTable peoples ={peoples} />
         </div>
     );
 };
