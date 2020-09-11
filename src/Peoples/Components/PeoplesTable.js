@@ -2,18 +2,7 @@ import React, {useMemo} from 'react';
 import People from "./People";
 import {tableConfig} from "../PeoplesConstants";
 
-const PeoplesTable = ({peoples,setSortedBy,isIncrease,setIsIncrease}) => {
-    const peopleRows = useMemo(() => {
-        return peoples.map((people) => <People people = {{
-            id:people.id,
-            firstName:people.firstName,
-            lastName: people.lastName,
-            email: people.email,
-            phone: people.phone
-        }}
-        key = {people.email}
-        tableConfig={tableConfig}/>)
-    },[peoples]);
+const PeoplesTable = ({peoples,filteredPeoples,setSortedBy,isIncrease,setIsIncrease}) => {
 
     const peoplesHeaders = useMemo(() => {
 
@@ -25,6 +14,29 @@ const PeoplesTable = ({peoples,setSortedBy,isIncrease,setIsIncrease}) => {
                                            }
                                            style={{border: '1px solid black',width:el.width,cursor:'pointer'}}>{el.name}</div>)
     },[setSortedBy,isIncrease]);
+
+    const peopleRows = useMemo(() => {
+        if (filteredPeoples.length > 0) {
+            return filteredPeoples.map((people) => <People people = {{
+                id:people.id,
+                firstName:people.firstName,
+                lastName: people.lastName,
+                email: people.email,
+                phone: people.phone
+            }}
+                                                   key = {people.email}
+                                                   tableConfig={tableConfig}/>)
+        }
+        return peoples.map((people) => <People people = {{
+            id:people.id,
+            firstName:people.firstName,
+            lastName: people.lastName,
+            email: people.email,
+            phone: people.phone
+        }}
+                                               key = {people.email}
+                                               tableConfig={tableConfig}/>)
+    },[peoples,filteredPeoples]);
 
     return (
         <div >

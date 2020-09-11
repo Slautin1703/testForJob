@@ -10,6 +10,8 @@ const PeoplesContainer = () => {
     const [peoples,setPeoples] = useState([]);
     const [sortedBy,setSortedBy] = useState(null);
     const [isIncrease,setIsIncrease] = useState(false);
+    const [filter,setFilter] = useState('');
+    const [filteredPeoples, setFilteredPeoples] = useState([])
 
     useEffect(() => {
         setIsLoading(true)
@@ -32,10 +34,16 @@ const PeoplesContainer = () => {
             <button onClick={() => setIsBigData(!isBigData)} disabled={isLoading}>
                 {isBigData ? 'Показать с маленьким обьемом ': 'Показать с большим обьемом'}
             </button>
+            <input type="text" name="" id="" value={filter} onChange={(e) => {setFilter(e.target.value)}}/>
+            <button onClick={() => {
+                const peoplesByFilter = peoples.filter((el) => el.id.toString().toLowerCase().indexOf(filter.toLowerCase()) === 0)
+                setFilteredPeoples(peoplesByFilter)
+            }}>Найти</button>
             <PeoplesTable peoples ={peoples}
                           setSortedBy ={setSortedBy}
                           isIncrease = {isIncrease}
                           setIsIncrease = {setIsIncrease}
+                          filteredPeoples = {filteredPeoples}
             />
         </div>
     );
