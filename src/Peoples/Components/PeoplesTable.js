@@ -16,18 +16,8 @@ const PeoplesTable = ({peoples,filteredPeoples,setSortedBy,isIncrease,setIsIncre
     },[setSortedBy,isIncrease]);
 
     const peopleRows = useMemo(() => {
-        if (filteredPeoples.length > 0) {
-            return filteredPeoples.map((people) => <People people = {{
-                id:people.id,
-                firstName:people.firstName,
-                lastName: people.lastName,
-                email: people.email,
-                phone: people.phone
-            }}
-                                                   key = {people.email}
-                                                   tableConfig={tableConfig}/>)
-        }
-        return peoples.map((people) => <People people = {{
+        const peoplesByFilter = filteredPeoples.length > 0 ? filteredPeoples : peoples;
+        return peoplesByFilter.map((people) => <People people = {{
             id:people.id,
             firstName:people.firstName,
             lastName: people.lastName,
