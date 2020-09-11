@@ -1,14 +1,15 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {getPeoplesAPI} from "./PeoplesAPI";
 import PeoplesTable from "./Components/PeoplesTable";
+import {sortForObj} from "../helpers";
+import {SORTED_BY_KEY} from "./PeoplesConstants";
 
 const PeoplesContainer = () => {
     const [isBigData,setIsBigData] = useState(false);
     const [isLoading,setIsLoading] = useState(false);
     const [peoples,setPeoples] = useState([]);
-    const [sortedBy,setSortedBy] = useState({});
-    const [isIncrease,setIsIncrease] = useState(false)
-
+    const [sortedBy,setSortedBy] = useState(null);
+    const [isIncrease,setIsIncrease] = useState(false);
 
     useEffect(() => {
         setIsLoading(true)
@@ -20,11 +21,11 @@ const PeoplesContainer = () => {
 
 
     useEffect(() => {
-        if(sortedBy === 0) {
-            const sorted = isIncrease ? peoples.sort((a,b) => a.id - b.id).slice() : peoples.sort((a,b) => b.id - a.id).slice();
+        if (sortedBy !== null) {
+            const sorted = sortForObj(peoples,isIncrease,SORTED_BY_KEY[sortedBy]).slice();
             setPeoples(sorted)
         }
-    },[sortedBy,isIncrease]);
+    },[sortedBy, isIncrease]);
 
     return (
         <div>

@@ -20,7 +20,8 @@ const PeoplesTable = ({peoples,setSortedBy,isIncrease,setIsIncrease}) => {
        return tableConfig.map((el) => <div key = {el.name}
                                            onClick={() => {
                                                setIsIncrease(!isIncrease)
-                                               setSortedBy(el.sortedBy)}
+                                               setSortedBy(el.sortedBy)
+                                           }
                                            }
                                            style={{border: '1px solid black',width:el.width,cursor:'pointer'}}>{el.name}</div>)
     },[setSortedBy,isIncrease]);

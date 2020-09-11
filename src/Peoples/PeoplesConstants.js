@@ -4,6 +4,13 @@ export const SORTED_BY = {
     LAST_NAME:2,
     EMAIL:3,
     PHONE:4
+};
+export const SORTED_BY_KEY = {
+    [SORTED_BY.ID]: 'id',
+    [SORTED_BY.FIRST_NAME]: 'firstName',
+    [SORTED_BY.LAST_NAME]: 'lastName',
+    [SORTED_BY.EMAIL]: 'email',
+    [SORTED_BY.PHONE]: 'phone',
 }
 
 export const tableConfig = [
